@@ -1,0 +1,18 @@
+// DLLExplorerUtilitys.idl : IDL-Quelle für DLL.ExplorerUtilitys
+//
+
+// Diese Datei wird mit dem MIDL-Tool bearbeitet,
+// um den Quellcode für die Typbibliothek (DLLExplorerUtilitys.tlb) und die Abruffunktionen zu erstellen.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(F4BFF684-7094-4D65-88FC-0301DFE638F3),
+	version(1.0),
+]
+library DLLExplorerUtilitysLib
+{
+	importlib("stdole2.tlb");
+};
+
