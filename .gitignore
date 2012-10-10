@@ -1,0 +1,114 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+#Visual Studio files
+*.[Oo]bj
+*.user
+*.aps
+*.vspscc
+*.vssscc
+*_i.h
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.meta
+*.sbr
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+*.sln.docstates
+ipch/
+obj/
+[Oo]bj
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+Backup*/
+UpgradeLog*.XML
+
+#Project files
+[Bb]uild/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+
+
+# mstest test
+TestResults/
+[Tt]est[Rr]esult*
+
+# Click-Once directory
+publish
+
+#added for RIA/Silverlight projects
+Generated_Code 
+
+#MonoDevelop
+*.pidb
+*.userprefs
+
+#Tooling
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+_ReSharper.*
+Ankh.NoLoad
+
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+#Subversion files
+.svn
+
+# Office Temp Files
+~$*
+
+#NuGet
+packages/
+
+#ncrunch
+*ncrunch*
+*crunch*.local.xml
+
+#Sandcastle
+/NetSrc/AppServiceObjectModel/Help/
+*shfbproj_*
+
+#Generic C++
+# Compiled Object files
+*.slo
+*.lo
+*.o
+# Compiled Dynamic libraries
+*.so
+# Compiled Static libraries
+*.lai
+*.la
+*.a
