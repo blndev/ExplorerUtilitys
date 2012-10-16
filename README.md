@@ -9,6 +9,7 @@ Planned Features:
 - Show Alternate DataStreams (NTFS)
 - set/unset hidden /system
 - automatic setup (msi) with selectable features
+- Filename Encode (replace "%20" with Space etc.)
 
 
 ## Build Environment
