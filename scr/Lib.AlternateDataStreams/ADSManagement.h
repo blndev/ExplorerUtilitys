@@ -1,8 +1,19 @@
+#include <Windows.h>
 #include <vector>
-#include <shellapi.h>
 #include <tchar.h>
 
-using namespace std;
-void HalloWelt();
+#ifdef _DEBUG
+#  define WriteDebug(str) OutputDebugStringW(str)
+#else
+#  define WriteDebug(str) void(0)
+#endif 
 
-vector<string> getAlternateDataStreams(TCHAR*  path);
+using namespace std;
+struct ADSInfo
+{
+	wstring Name;
+	long Size;
+};
+
+vector<ADSInfo> getAlternateDataStreams(LPCWSTR  path);
+

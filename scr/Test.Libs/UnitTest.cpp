@@ -56,7 +56,7 @@ namespace TestLibs
 		[TestMethod]
 		void TestMethod1()
 		{
-			HalloWelt();
+			//HalloWelt();
 		};
 	};
 }
