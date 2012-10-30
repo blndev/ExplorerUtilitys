@@ -61,7 +61,7 @@ vector<ADSInfo> getAlternateDataStreams(LPCWSTR  path)
 			info.Name = fsd.cStreamName;
 			info.Size=fsd.StreamSize.LowPart;
 			info.Name.replace(info.Name.find(L":$DATA"),6 , L"");
-
+			info.Name = info.Name.substr(1, info.Name.length()-1); //remove the first ":"
 			ret.push_back(info);
 		}
 	}

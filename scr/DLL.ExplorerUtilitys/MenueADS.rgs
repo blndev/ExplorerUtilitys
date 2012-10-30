@@ -1,0 +1,49 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {129BEF8A-7FA0-4155-8976-8DF9CCFC9A47} = s 'MenuRoot Class'
+		{
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{F4BFF684-7094-4D65-88FC-0301DFE638F3}'
+			Version = s '1.0'
+		}
+	}
+	NoRemove AllFileSystemObjects
+	{
+		NoRemove ShellEx
+		{
+			NoRemove ContextMenuHandlers
+			{
+				ForceRemove UtilitysStream = s '{129BEF8A-7FA0-4155-8976-8DF9CCFC9A47}'
+			}
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove Windows
+			{
+				NoRemove CurrentVersion
+				{	
+					NoRemove Shell Extensions
+					{
+						NoRemove Approved
+						{
+							ForceRemove UtilitysStream = s '{129BEF8A-7FA0-4155-8976-8DF9CCFC9A47}'
+						}
+					}
+				}
+			}
+		}
+	}
+}

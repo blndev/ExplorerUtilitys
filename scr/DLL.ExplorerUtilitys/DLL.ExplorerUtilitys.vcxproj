@@ -243,6 +243,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MenueADS.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -253,6 +254,7 @@
   <ItemGroup>
     <ClInclude Include="DLLExplorerUtilitys_i.h" />
     <ClInclude Include="dllmain.h" />
+    <ClInclude Include="MenueADS.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -266,9 +268,15 @@
   <ItemGroup>
     <None Include="DLL.ExplorerUtilitys.def" />
     <None Include="DLL.ExplorerUtilitys.rgs" />
+    <None Include="MenueADS.rgs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="DLLExplorerUtilitys.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib.AlternateDataStreams\Lib.AlternateDataStreams.vcxproj">
+      <Project>{8d2bc8e0-a943-488c-9bbb-e3fc5c0fb49e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
