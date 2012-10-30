@@ -133,12 +133,9 @@ HRESULT CMenueADS::InvokeCommand
 	if(adsinfos.size()-1>=vectorpos)
 	{
 		wchar_t szCmd[1024];
-		wsprintf (szCmd, L"%ls:%ls",m_szFile, adsinfos.at(vectorpos).Name.c_str());
-		MessageBox (
-			pCmdInfo->hwnd,
-			szCmd,
-			L"Streams",
-			MB_ICONINFORMATION );
+		wsprintf (szCmd, L" /T:1F /C more < \"%ls:%ls\" && pause",m_szFile, adsinfos.at(vectorpos).Name.c_str());
+		//MessageBox (pCmdInfo->hwnd,szCmd,L"Streams",MB_ICONINFORMATION );
+		ShellExecute (NULL,L""/*open*/,	L"cmd.exe", szCmd/*args*/,NULL/*dir*/, SW_SHOW);
 		return S_OK;
 	}
 	else
