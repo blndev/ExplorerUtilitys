@@ -8,11 +8,27 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [
+	object,
+	uuid(96F5392C-8D9D-48E2-93BB-2BE7718AD0B3),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IMenueADS : IDispatch{
+};
+[
 	uuid(F4BFF684-7094-4D65-88FC-0301DFE638F3),
 	version(1.0),
 ]
 library DLLExplorerUtilitysLib
 {
 	importlib("stdole2.tlb");
+	[
+		uuid(129BEF8A-7FA0-4155-8976-8DF9CCFC9A47)		
+	]
+	coclass MenueADS
+	{
+		[default] interface IMenueADS;
+	};
 };
 

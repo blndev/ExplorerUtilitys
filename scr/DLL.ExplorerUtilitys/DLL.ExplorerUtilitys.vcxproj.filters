@@ -31,6 +31,9 @@
     <ClCompile Include="DLLExplorerUtilitys_i.c">
       <Filter>Generierte Dateien</Filter>
     </ClCompile>
+    <ClCompile Include="MenueADS.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="DLLExplorerUtilitys_i.h">
       <Filter>Generierte Dateien</Filter>
     </ClInclude>
+    <ClInclude Include="MenueADS.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DLL.ExplorerUtilitys.rc">
@@ -63,6 +69,9 @@
     </None>
     <None Include="DLL.ExplorerUtilitys.def">
       <Filter>Quelldateien</Filter>
+    </None>
+    <None Include="MenueADS.rgs">
+      <Filter>Ressourcendateien</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

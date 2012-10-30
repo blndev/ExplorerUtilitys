@@ -1,0 +1,1 @@
+﻿this is a small programm to run tests on other systems where no vs is installed
