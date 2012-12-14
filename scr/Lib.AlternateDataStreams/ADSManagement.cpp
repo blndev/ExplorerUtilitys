@@ -27,7 +27,7 @@ void HandleError(LPTSTR lpszFunction)
 	lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, (lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR)); 
 	StringCchPrintf((LPTSTR)lpDisplayBuf,  LocalSize(lpDisplayBuf) / sizeof(TCHAR),  TEXT("%s failed with error %d\n\n%s"), lpszFunction, dw, lpMsgBuf); 
 	WriteDebug((LPCTSTR)lpDisplayBuf);
-	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK); 
+	//MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK); 
 
 	LocalFree(lpMsgBuf);
 	LocalFree(lpDisplayBuf);
@@ -42,7 +42,7 @@ vector<ADSInfo> getAlternateDataStreams(LPCWSTR  path)
 	vector<ADSInfo> ret; 
 
 	WIN32_FIND_STREAM_DATA fsd;
-	HANDLE result = FindFirstStreamW(path,FindStreamInfoStandard, &fsd,0);
+	HANDLE result = FindFirstStreamW(path, FindStreamInfoStandard, &fsd, 0);
 	if(result==INVALID_HANDLE_VALUE)
 	{
 		HandleError(TEXT("find streams"));

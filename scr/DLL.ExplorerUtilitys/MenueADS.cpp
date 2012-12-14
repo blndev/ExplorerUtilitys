@@ -47,7 +47,6 @@ HRESULT CMenueADS::Initialize
 			if (DragQueryFile (hDrop, filecount, m_szFile, MAX_PATH) != 0)
 			{
 				//DebugWrite (_T ("selected file %s"), m_szFile);
-				//TODO: Save vector;
 				adsinfos = getAlternateDataStreams(m_szFile);
 				if(adsinfos.size()>0)
 				{
@@ -132,6 +131,7 @@ HRESULT CMenueADS::InvokeCommand
 	UINT vectorpos = (LOWORD(pCmdInfo->lpVerb));
 	if(adsinfos.size()-1>=vectorpos)
 	{
+		//TODO: create viewer, possible add save as etc
 		wchar_t szCmd[1024];
 		wsprintf (szCmd, L" /T:1F /C more < \"%ls:%ls\" && pause",m_szFile, adsinfos.at(vectorpos).Name.c_str());
 		//MessageBox (pCmdInfo->hwnd,szCmd,L"Streams",MB_ICONINFORMATION );
