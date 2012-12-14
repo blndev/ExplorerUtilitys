@@ -1,30 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Setup.ExplorerUtilitys" Language="1033" Version="1.0.0.0" Manufacturer="blndev" UpgradeCode="fe98ef31-58e7-4783-9a98-1892433c3d2f">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <!--  
+    This Setup was build by using the following tutorial: http://blog.schelian.de/2011/11/alles-wix-oder-was-windows-installer-xml-toolset-fuer-dummies/
+    <?define Manufactor = "Hans-Peter Schelian"?>
+        Anstelle den Manufactor an mehreren Stellen anzugeben weise ich hier lieber einer Variablen den Wert zu
+        und verwende im weiteren Verlauf einfach die Variable
+  -->
+  <!--  <?define UpgradeGuid = "{3B563A68-99BC-4528-9356-295ADB67909A}"?>
+        Ganz Wichtig, die Guid für den UpgradeCode darf nach der ersten Installation nicht mehr geändert werden
+        aus diesem Grund weise ich diese Guid einer Variablen zu die ich dann im weiteren Verlauf im Bereich
+        <Product UpgradeCode="$(var.UpgradeGuid)" /> und  im Bereich <Upgrade Id="$(var.UpgradeGuid)" anstelle
+        der Eingabe der eigentlichen Guid verwenden kann.
+  -->
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+  <!-- Hier nun alle Defines die durch den Präprozessor aufgelöst werden -->
+  <?define Manufactor = "Daniel Bedarf"?>
+  <?define UpgradeGuid = "{fe98ef31-58e7-4783-9a98-1892433c3d2f}"?>
 
-		<Feature Id="ProductFeature" Title="Setup.ExplorerUtilitys" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+  <!-- * = new id for each build -->
+  <Product
+   Id="*"
+   Name="Github Explorer Utilitys"
+   Language="1033"
+   Version="!(bind.FileVersion.MyApplicationFile)"
+   Manufacturer="$(var.Manufactor)"
+   UpgradeCode="$(var.UpgradeGuid)">
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Setup.ExplorerUtilitys" />
-			</Directory>
-		</Directory>
-	</Fragment>
+    <Package
+     InstallerVersion="200"
+     Compressed="yes"
+     Description="Installiert die Stream - Anzeige"
+     Manufacturer="$(var.Manufactor)"
+     Comments="TEST Comment"
+    />
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+    <!-- http://wix.sourceforge.net/manual-wix3/wix_xsd_media.htm    -->
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="Setup.ExplorerUtilitys" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Setup.ExplorerUtilitys" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+      <!-- <Component Id="ProductComponent"> -->
+      <!-- TODO: Insert files, registry keys, and other resources here. -->
+      <!-- </Component> -->
+    </ComponentGroup>
+  </Fragment>
 </Wix>
