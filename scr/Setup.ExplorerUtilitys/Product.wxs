@@ -22,7 +22,7 @@
    Id="*"
    Name="Github Explorer Utilitys"
    Language="1033"
-   Version="!(bind.FileVersion.MyApplicationFile)"
+   Version="0.0.0.1"
    Manufacturer="$(var.Manufactor)"
    UpgradeCode="$(var.UpgradeGuid)">
 
@@ -34,30 +34,101 @@
      Comments="TEST Comment"
     />
 
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    
-    <!-- http://wix.sourceforge.net/manual-wix3/wix_xsd_media.htm    -->
-    <MediaTemplate />
+    <Media
+    Id="1"
+    Cabinet="media1.cab"
+    EmbedCab="yes"
+  />
+    <Property Id="ARPHELPTELEPHONE" Value="000" />
+    <Property Id="ARPHELPLINK" Value="http://github,.com" />
+    <Property Id="ARPCONTACT" Value="blndev" />
+    <Property Id="ARPCOMMENTS" Value="Explorer Utilitys" />
+    <Property Id="ARPURLINFOABOUT" Value="http://github.com" />
 
-    <Feature Id="ProductFeature" Title="Setup.ExplorerUtilitys" Level="1">
-      <ComponentGroupRef Id="ProductComponents" />
-    </Feature>
-  </Product>
+    <!--<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />-->
 
-  <Fragment>
+    <!-- Erklärungen zum Bereich <Upgrade>
+        Upgrade Id="$(var.UpgradeGuid)"> hier Zuweisung durch Präprozessor Variable, siehe auch Hinweise
+          zu define UpgradeGuid
+ 
+        <UpgradeVersion Minimum="!(bind.FileVersion.MyApplicationFile)" - Hier wird festgestellt ob
+          bereits ein neueres Produkt (Neuere Version) installiert ist.
+ 
+        <UpgradeVersion Minimum="0.1.0.0" - Prüfung ob bereits eine frühere Version installiert ist
+ 
+        <UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" - Ist das Prpdukt in welcher Versio auch immer
+            bereits auf dem Rechner installiert, dann setzt die internet Variable PREVIOUSVERSIONSINSTALLED,
+            dadurch wird verhindert, dass selbst dann wenn man eine Version die nicht als Upgrade gilt
+            (nur im vierten Bereich) der Versionsnummer geändert ist, nicht dazu führt, dass es zu doppelten
+            Einträgen im Add/Remove Programms kommt.
+    -->
+    <Upgrade Id="$(var.UpgradeGuid)">
+      <UpgradeVersion Minimum="0.0.0.1"
+                      IncludeMinimum="no"
+                      OnlyDetect="yes"
+                      Language="1033"
+                      Property="NEWPRODUCTFOUND" />
+      <!--<UpgradeVersion Minimum="0.0.0.0"
+                      IncludeMinimum="yes"
+                      Maximum="0.0.0.3"
+                      IncludeMaximum="no"
+                      Language="1033"
+                      Property="UPGRADEFOUND" />-->
+      <UpgradeVersion Minimum="0.0.0.1" Maximum="99.0.0.0"
+         Property="PREVIOUSVERSIONSINSTALLED"
+         IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+
+
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="Setup.ExplorerUtilitys" />
+        <Directory Id="CompanyFolder" Name="Github OSS" >
+          <Directory Id="INSTALLFOLDER" Name="ExplorerUtilitys" >
+            <Component Id="ProductComponent" Guid="{B7504CB3-8774-45EC-A3EA-62A74E363696}">
+              <File Id="ShellExtension" Name="$(var.DLL.ExplorerUtilitys.TargetFileName)" Source="$(var.DLL.ExplorerUtilitys.TargetPath)" KeyPath="yes">
+              </File>
+            </Component>
+           
+            <Component Id="readme.txt" Guid="{50DCA7B7-0E92-4BE1-9462-77D4FAF9C959}">
+              <File Id="readme.txt" Name="!ReadMe.txt" Source="$(var.DLL.ExplorerUtilitys.ProjectDir)ReadMe.txt" KeyPath="yes" />
+            </Component>
+           
+          </Directory>
+        </Directory>
       </Directory>
     </Directory>
-  </Fragment>
 
-  <Fragment>
-    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-      <!-- <Component Id="ProductComponent"> -->
-      <!-- TODO: Insert files, registry keys, and other resources here. -->
-      <!-- </Component> -->
-    </ComponentGroup>
-  </Fragment>
+    <Feature Id="ProductFeature" Title="ShellExtensions" Level="1">
+      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="readme.txt" />
+    </Feature>
+    
+    
+    <!-- Keinen Downgrade zulassen -->
+    <CustomAction Id="PreventDowngrading" Error="there is aalready a new version installed." />
+
+    <!-- Nun noch die auszuführende Reihenfolg angeben
+        siehe auch http://wix.sourceforge.net/manual-wix3/wix_xsd_installexecutesequence.htm
+    -->
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading"
+              After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <!-- Wenn ein neueres Produkt gerunden wurde, soll das auch in der UI ausgegeben werden
+        siehe auch http://wix.sourceforge.net/manual-wix3/wix_xsd_installuisequence.htm
+    -->
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading"
+              After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <!-- So kann man eine eigene Lizenzmeldung ausgeben -->
+    <!--<WixVariable Id='WixUILicenseRtf' Overridable='yes' Value='$(var.WixDemoProjekt.ProjectDir)Lizenzbestimmungen.rtf'/>-->
+
+    <UIRef Id="WixUI_Minimal" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    
+  </Product>
 </Wix>
