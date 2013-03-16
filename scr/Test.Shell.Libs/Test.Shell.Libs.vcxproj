@@ -155,6 +155,9 @@
     <ProjectReference Include="..\Lib.AlternateDataStreams\Lib.AlternateDataStreams.vcxproj">
       <Project>{8d2bc8e0-a943-488c-9bbb-e3fc5c0fb49e}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Lib.Win32UI\Lib.Win32UI.vcxproj">
+      <Project>{f633389a-4683-4e26-990b-3f969be42306}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
